@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import ModalComponent from '../modal/ModalComponent';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 
 const useStyle = makeStyles(()=>({
@@ -27,12 +27,17 @@ const useStyle = makeStyles(()=>({
 }));
 
 const FilterButton = (props) => {
-    const classes = useStyle();
+    FilterButton.propTypes = {
+        name: propTypes.string.isRequired,
+        key: propTypes.number.isRequired,
+        value: propTypes.object.isRequired,
+    }
     const {key, name, value} = props;
 
     const [open, setOpen] = React.useState(false);
-    const [buttonName, setName] = React.useState(name);
-
+    const [counter, setCounter] = React.useState(0);
+    
+    const classes = useStyle();
 
     const openModal = () => {
         setOpen(true);
@@ -41,15 +46,14 @@ const FilterButton = (props) => {
     return(
         <div data-testid='button' style={{width: '150px'}}>
             <Button variant='outlined' key={key} className={classes.modal} onClick={openModal}>
-                {buttonName}
+                {name} ({counter})
             </Button>
-            <ModalComponent value={value} open={open} setOpen={setOpen} setName={setName}/>
+            {console.log(value)}
+            <div style={{float:'left'}}>
+                <ModalComponent value={value} open={open} setOpen={setOpen} setCounter={setCounter} counter={counter}/>
+            </div>
         </div>
     )
 }
-
-// FilterButton.PropTypes = {
-//     name: PropTypes.string.isRequired
-// }
 
 export default FilterButton;

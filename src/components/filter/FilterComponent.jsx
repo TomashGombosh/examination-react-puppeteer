@@ -21,7 +21,7 @@ const FilterComponent = () => {
         <div data-testid='filter' className={classes.filter} >
             <div style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'row'}}>
                 {Object.entries(filterOptions).map(([keys, value, index]) => {
-                    return (<span style={{marginLeft: '3em'}}><FilterButton key={index} name={keys} value={{id: 1, title: 'test'}}/></span>)})
+                    return (<span style={{marginLeft: '3em'}}><FilterButton key={index} name={keys} value={value}/></span>)})
                 }
             </div>
         </div>
